@@ -26,8 +26,9 @@ colors = {
     "purple": ["#baa0f8", "176", "Magenta"],
     "grey": ["#82878b", "246", "LightGrey"],
     "none": ["NONE", "NONE", "NONE"],
-    ""
 }
+
+colors["s:configuration.cursor]"] = colors["none"]
 
 
 def parse(s: str) -> str:
@@ -44,14 +45,14 @@ def parse(s: str) -> str:
     name = vals[0].strip(" '")
 
     fg = vals[1].strip()
-    if fg.startswith("s:palette."):
+    if fg.startswith("s:palette"):
         fg = fg[10:]
     if fg not in colors:
         print("fg:", fg, file=stderr)
         return ""
 
     bg = vals[2].strip()
-    if bg.startswith("s:palette."):
+    if bg.startswith("s:palette"):
         bg = bg[10:]
     if bg not in colors:
         print(f"bg:", bg, file=stderr)
@@ -62,7 +63,7 @@ def parse(s: str) -> str:
         a1 = "underline"
 
     a2 = vals[4].strip() if len(vals) > 4 else "none"
-    if a2.startswith("s:palette."):
+    if a2.startswith("s:palette"):
         a2 = a2[10:]
     if a2 not in colors:
         print(f"a2:", a2, file=stderr)
