@@ -74,10 +74,10 @@ hi link WildMenu PmenuSel
 hi PmenuThumb ctermfg=NONE ctermbg=246 guifg=NONE guibg=#82878b cterm=NONE gui=NONE guisp=NONE
 hi NormalFloat ctermfg=250 ctermbg=236 guifg=#e1e2e3 guibg=#353f46 cterm=NONE gui=NONE guisp=NONE
 hi Question ctermfg=179 ctermbg=NONE guifg=#e3d367 guibg=NONE cterm=NONE gui=NONE guisp=NONE
-hi SpellBad ctermfg=203 ctermbg=NONE guifg=#f76c7c guibg=NONE cterm=underline gui=underline guisp=203
-hi SpellCap ctermfg=179 ctermbg=NONE guifg=#e3d367 guibg=NONE cterm=underline gui=underline guisp=179
-hi SpellLocal ctermfg=110 ctermbg=NONE guifg=#78cee9 guibg=NONE cterm=underline gui=underline guisp=110
-hi SpellRare ctermfg=176 ctermbg=NONE guifg=#baa0f8 guibg=NONE cterm=underline gui=underline guisp=176
+hi SpellBad ctermfg=203 ctermbg=NONE guifg=#f76c7c guibg=NONE cterm=underline gui=underline guisp=#f76c7c
+hi SpellCap ctermfg=179 ctermbg=NONE guifg=#e3d367 guibg=NONE cterm=underline gui=underline guisp=#e3d367
+hi SpellLocal ctermfg=110 ctermbg=NONE guifg=#78cee9 guibg=NONE cterm=underline gui=underline guisp=#78cee9
+hi SpellRare ctermfg=176 ctermbg=NONE guifg=#baa0f8 guibg=NONE cterm=underline gui=underline guisp=#baa0f8
 hi StatusLine ctermfg=250 ctermbg=237 guifg=#e1e2e3 guibg=#3a444b cterm=NONE gui=NONE guisp=NONE
 hi StatusLineTerm ctermfg=250 ctermbg=237 guifg=#e1e2e3 guibg=#3a444b cterm=NONE gui=NONE guisp=NONE
 hi StatusLineNC ctermfg=246 ctermbg=236 guifg=#82878b guibg=#313b42 cterm=NONE gui=NONE guisp=NONE
@@ -215,15 +215,15 @@ else
 endif
 
 if g:minisonokai_diagnostic_text_highlight
-	hi ErrorText ctermfg=NONE ctermbg=52 guifg=NONE guibg=#55393d cterm=underline gui=underline guisp=203
-	hi WarningText ctermfg=NONE ctermbg=54 guifg=NONE guibg=#4e432f cterm=underline gui=underline guisp=179
-	hi InfoText ctermfg=NONE ctermbg=17 guifg=NONE guibg=#354157 cterm=underline gui=underline guisp=110
-	hi HintText ctermfg=NONE ctermbg=22 guifg=NONE guibg=#394634 cterm=underline gui=underline guisp=107
+	hi ErrorText ctermfg=NONE ctermbg=52 guifg=NONE guibg=#55393d cterm=underline gui=underline guisp=#f76c7c
+	hi WarningText ctermfg=NONE ctermbg=54 guifg=NONE guibg=#4e432f cterm=underline gui=underline guisp=#e3d367
+	hi InfoText ctermfg=NONE ctermbg=17 guifg=NONE guibg=#354157 cterm=underline gui=underline guisp=#78cee9
+	hi HintText ctermfg=NONE ctermbg=22 guifg=NONE guibg=#394634 cterm=underline gui=underline guisp=#9cd57b
 else
-	hi ErrorText ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=underline gui=underline guisp=203
-	hi WarningText ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=underline gui=underline guisp=179
-	hi InfoText ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=underline gui=underline guisp=110
-	hi HintText ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=underline gui=underline guisp=107
+	hi ErrorText ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=underline gui=underline guisp=#f76c7c
+	hi WarningText ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=underline gui=underline guisp=#e3d367
+	hi InfoText ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=underline gui=underline guisp=#78cee9
+	hi HintText ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=underline gui=underline guisp=#9cd57b
 endif
 if g:minisonokai_diagnostic_line_highlight
 	hi ErrorLine ctermfg=NONE ctermbg=52 guifg=NONE guibg=#55393d cterm=NONE gui=NONE guisp=NONE
@@ -231,10 +231,10 @@ if g:minisonokai_diagnostic_line_highlight
 	hi InfoLine ctermfg=NONE ctermbg=17 guifg=NONE guibg=#354157 cterm=NONE gui=NONE guisp=NONE
 	hi HintLine ctermfg=NONE ctermbg=22 guifg=NONE guibg=#394634 cterm=NONE gui=NONE guisp=NONE
 else
-  highlight clear ErrorLine
-  highlight clear WarningLine
-  highlight clear InfoLine
-  highlight clear HintLine
+  hi clear ErrorLine
+  hi clear WarningLine
+  hi clear InfoLine
+  hi clear HintLine
 endif
 
 
