@@ -68,31 +68,36 @@ hi SpecialKey ctermfg=237 ctermbg=NONE guifg=#414b53 guibg=NONE cterm=NONE gui=N
 hi Pmenu ctermfg=250 ctermbg=236 guifg=#e1e2e3 guibg=#353f46 cterm=NONE gui=NONE guisp=NONE
 hi PmenuSbar ctermfg=NONE ctermbg=236 guifg=NONE guibg=#353f46 cterm=NONE gui=NONE guisp=NONE
 hi PmenuSel ctermfg=235 ctermbg=110 guifg=#273136 guibg=#7cd5f1 cterm=NONE gui=NONE guisp=NONE
-
 hi link WildMenu PmenuSel
-
 hi PmenuThumb ctermfg=NONE ctermbg=246 guifg=NONE guibg=#82878b cterm=NONE gui=NONE guisp=NONE
+
 hi NormalFloat ctermfg=250 ctermbg=236 guifg=#e1e2e3 guibg=#353f46 cterm=NONE gui=NONE guisp=NONE
 hi Question ctermfg=179 ctermbg=NONE guifg=#e3d367 guibg=NONE cterm=NONE gui=NONE guisp=NONE
+
 hi SpellBad ctermfg=203 ctermbg=NONE guifg=#f76c7c guibg=NONE cterm=underline gui=underline guisp=#f76c7c
 hi SpellCap ctermfg=179 ctermbg=NONE guifg=#e3d367 guibg=NONE cterm=underline gui=underline guisp=#e3d367
 hi SpellLocal ctermfg=110 ctermbg=NONE guifg=#78cee9 guibg=NONE cterm=underline gui=underline guisp=#78cee9
 hi SpellRare ctermfg=176 ctermbg=NONE guifg=#baa0f8 guibg=NONE cterm=underline gui=underline guisp=#baa0f8
+
 hi StatusLine ctermfg=250 ctermbg=237 guifg=#e1e2e3 guibg=#3a444b cterm=NONE gui=NONE guisp=NONE
 hi StatusLineTerm ctermfg=250 ctermbg=237 guifg=#e1e2e3 guibg=#3a444b cterm=NONE gui=NONE guisp=NONE
 hi StatusLineNC ctermfg=246 ctermbg=236 guifg=#82878b guibg=#313b42 cterm=NONE gui=NONE guisp=NONE
 hi StatusLineTermNC ctermfg=246 ctermbg=236 guifg=#82878b guibg=#313b42 cterm=NONE gui=NONE guisp=NONE
+
 hi TabLine ctermfg=250 ctermbg=237 guifg=#e1e2e3 guibg=#414b53 cterm=NONE gui=NONE guisp=NONE
 hi TabLineFill ctermfg=246 ctermbg=236 guifg=#82878b guibg=#313b42 cterm=NONE gui=NONE guisp=NONE
 hi TabLineSel ctermfg=235 ctermbg=203 guifg=#273136 guibg=#ff6d7e cterm=NONE gui=NONE guisp=NONE
+
 hi VertSplit ctermfg=237 ctermbg=NONE guifg=#1c1e1f guibg=NONE cterm=NONE gui=NONE guisp=NONE
 hi Visual ctermfg=NONE ctermbg=237 guifg=NONE guibg=#3a444b cterm=NONE gui=NONE guisp=NONE
 hi VisualNOS ctermfg=NONE ctermbg=237 guifg=NONE guibg=#3a444b cterm=underline gui=underline guisp=NONE
+
 hi QuickFixLine ctermfg=110 ctermbg=NONE guifg=#78cee9 guibg=NONE cterm=bold gui=bold guisp=NONE
 hi Debug ctermfg=179 ctermbg=NONE guifg=#e3d367 guibg=NONE cterm=NONE gui=NONE guisp=NONE
 hi debugPC ctermfg=235 ctermbg=107 guifg=#273136 guibg=#9cd57b cterm=NONE gui=NONE guisp=NONE
 hi debugBreakpoint ctermfg=235 ctermbg=203 guifg=#273136 guibg=#f76c7c cterm=NONE gui=NONE guisp=NONE
 hi ToolbarButton ctermfg=235 ctermbg=110 guifg=#273136 guibg=#7cd5f1 cterm=NONE gui=NONE guisp=NONE
+
 if has('nvim')
 	hi Substitute ctermfg=235 ctermbg=179 guifg=#273136 guibg=#e3d367 cterm=NONE gui=NONE guisp=NONE
   hi link LspDiagnosticsFloatingError ErrorFloat
@@ -123,8 +128,7 @@ if has('nvim')
   hi link healthSuccess Green
   hi link healthWarning Yellow
 endif
-" }}}
-" Syntax: {{{
+
 if g:minisonokai_enable_italic
 	hi Type ctermfg=110 ctermbg=NONE guifg=#78cee9 guibg=NONE cterm=italic gui=italic guisp=NONE
 	hi Structure ctermfg=110 ctermbg=NONE guifg=#78cee9 guibg=NONE cterm=italic gui=italic guisp=NONE
@@ -138,6 +142,7 @@ else
 	hi Identifier ctermfg=215 ctermbg=NONE guifg=#f3a96a guibg=NONE cterm=NONE gui=NONE guisp=NONE
 	hi Constant ctermfg=215 ctermbg=NONE guifg=#f3a96a guibg=NONE cterm=NONE gui=NONE guisp=NONE
 endif
+
 hi PreProc ctermfg=203 ctermbg=NONE guifg=#f76c7c guibg=NONE cterm=NONE gui=NONE guisp=NONE
 hi PreCondit ctermfg=203 ctermbg=NONE guifg=#f76c7c guibg=NONE cterm=NONE gui=NONE guisp=NONE
 hi Include ctermfg=203 ctermbg=NONE guifg=#f76c7c guibg=NONE cterm=NONE gui=NONE guisp=NONE
@@ -163,6 +168,7 @@ hi Operator ctermfg=203 ctermbg=NONE guifg=#f76c7c guibg=NONE cterm=NONE gui=NON
 hi Title ctermfg=203 ctermbg=NONE guifg=#f76c7c guibg=NONE cterm=bold gui=bold guisp=NONE
 hi Tag ctermfg=215 ctermbg=NONE guifg=#f3a96a guibg=NONE cterm=NONE gui=NONE guisp=NONE
 hi Delimiter ctermfg=250 ctermbg=NONE guifg=#e1e2e3 guibg=NONE cterm=NONE gui=NONE guisp=NONE
+
 if g:minisonokai_disable_italic_comment
 	hi Comment ctermfg=246 ctermbg=NONE guifg=#82878b guibg=NONE cterm=NONE gui=NONE guisp=NONE
 	hi SpecialComment ctermfg=246 ctermbg=NONE guifg=#82878b guibg=NONE cterm=NONE gui=NONE guisp=NONE
@@ -172,6 +178,7 @@ else
 	hi SpecialComment ctermfg=246 ctermbg=NONE guifg=#82878b guibg=NONE cterm=italic gui=italic guisp=NONE
 	hi Todo ctermfg=110 ctermbg=NONE guifg=#78cee9 guibg=NONE cterm=italic gui=italic guisp=NONE
 endif
+
 hi Ignore ctermfg=246 ctermbg=NONE guifg=#82878b guibg=NONE cterm=NONE gui=NONE guisp=NONE
 hi Underlined ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=underline gui=underline guisp=NONE
 
@@ -225,6 +232,7 @@ else
 	hi InfoText ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=underline gui=underline guisp=#78cee9
 	hi HintText ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=underline gui=underline guisp=#9cd57b
 endif
+
 if g:minisonokai_diagnostic_line_highlight
 	hi ErrorLine ctermfg=NONE ctermbg=52 guifg=NONE guibg=#55393d cterm=NONE gui=NONE guisp=NONE
 	hi WarningLine ctermfg=NONE ctermbg=54 guifg=NONE guibg=#4e432f cterm=NONE gui=NONE guisp=NONE
@@ -470,8 +478,8 @@ hi link goDeclType Red
 
 hi link rustStructure Red
 hi link rustIdentifier OrangeItalic
-"hi link rustModPath BlueItalic
-"hi link rustModPathSep Grey
+hi link rustModPath BlueItalic
+hi link rustModPathSep Grey
 hi link rustSelf OrangeItalic
 hi link rustSuper OrangeItalic
 hi link rustDeriveTrait Purple
@@ -480,7 +488,7 @@ hi link rustMacroVariable OrangeItalic
 hi link rustAssert Green
 hi link rustPanic Green
 hi link rustPubScopeCrate BlueItalic
-"hi link rustAttribute Purple
+hi link rustAttribute Purple
 
 hi link phpVarSelector Fg
 hi link phpIdentifier Fg
