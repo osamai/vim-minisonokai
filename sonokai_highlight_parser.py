@@ -69,7 +69,7 @@ def parse(s: str) -> str:
         print(f"a2:", a2, file=stderr)
         return ""
 
-    return f"hi {name} ctermfg={colors[fg][1]} ctermbg={colors[bg][1]} guifg={colors[fg][0]} guibg={colors[bg][0]} cterm={a1} gui={a1} guisp={colors[a2][1]}"
+    return f"hi {name} ctermfg={colors[fg][1]} ctermbg={colors[bg][1]} guifg={colors[fg][0]} guibg={colors[bg][0]} cterm={a1} gui={a1} guisp={colors[a2][0]}"
 
 
 def main():
