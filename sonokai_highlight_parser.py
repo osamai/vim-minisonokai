@@ -97,7 +97,7 @@ def main():
             lines[i] = f"{sl}{pl}\n"
             # print(f"{i+1}:", pl)
 
-    outfile = argv[2] if len(argv) > 2 else "highlight.vim"
+    outfile = argv[2] if len(argv) > 2 else "minisonokai.vim"
     with open(outfile, "w") as f:
         f.writelines(lines)
 
