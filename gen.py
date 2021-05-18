@@ -3,35 +3,51 @@
 from sys import argv, exit, stderr
 
 
+STARTLINE = 29
+
+headlines = [
+    "\" https://github.com/osamai/vim-minisonokai",
+    "\" minisonokai is a minimal version of sonokai (https://github.com/sainnhe/sonokai)\n",
+    "let g:colors_name = 'minisonokai'\n",
+    "if !(has('termguicolors') && &termguicolors) && !has('gui_running') && &t_Co != 256",
+    "\tfinish",
+    "endif\n\n",
+]
+
 colors = {
-    "black": ["#1c1e1f", "237", "DarkGrey"],
-    "bg0": ["#273136", "235", "Black"],
-    "bg1": ["#313b42", "236", "DarkGrey"],
-    "bg2": ["#353f46", "236", "DarkGrey"],
-    "bg3": ["#3a444b", "237", "DarkGrey"],
-    "bg4": ["#414b53", "237", "Grey"],
-    "bg_red": ["#ff6d7e", "203", "Red"],
+    "black": ["#181819", "237", "DarkGrey"],
+    "bg0": ["#2c2e34", "235", "Black"],
+    "bg1": ["#33353f", "236", "DarkGrey"],
+    "bg2": ["#363944", "236", "DarkGrey"],
+    "bg3": ["#3b3e48", "237", "DarkGrey"],
+    "bg4": ["#414550", "237", "Grey"],
+    "bg_red": ["#ff6077", "203", "Red"],
     "diff_red": ["#55393d", "52", "DarkRed"],
-    "bg_green": ["#a2e57b", "107", "Green"],
+    "bg_green": ["#a7df78", "107", "Green"],
     "diff_green": ["#394634", "22", "DarkGreen"],
-    "bg_blue": ["#7cd5f1", "110", "Blue"],
+    "bg_blue": ["#85d3f2", "110", "Blue"],
     "diff_blue": ["#354157", "17", "DarkBlue"],
     "diff_yellow": ["#4e432f", "54", "DarkMagenta"],
-    "fg": ["#e1e2e3", "250", "White"],
-    "red": ["#f76c7c", "203", "Red"],
-    "orange": ["#f3a96a", "215", "Orange"],
-    "yellow": ["#e3d367", "179", "Yellow"],
-    "green": ["#9cd57b", "107", "Green"],
-    "blue": ["#78cee9", "110", "Blue"],
-    "purple": ["#baa0f8", "176", "Magenta"],
-    "grey": ["#82878b", "246", "LightGrey"],
+    "fg": ["#e2e2e3", "250", "White"],
+    "red": ["#fc5d7c", "203", "Red"],
+    "orange": ["#f39660", "215", "Orange"],
+    "yellow": ["#e7c664", "179", "Yellow"],
+    "green": ["#9ed072", "107", "Green"],
+    "blue": ["#76cce0", "110", "Blue"],
+    "purple": ["#b39df3", "176", "Magenta"],
+    "grey": ["#7f8490", "246", "LightGrey"],
     "none": ["NONE", "NONE", "NONE"],
 }
-
 colors["s:configuration.cursor]"] = colors["none"]
 
+replacemap = [
+    ("s:configuration.", "g:minisonokai_"),
+    ("highlight!", "hi"),
+    ("highlight clear", "hi clear"),
+]
 
-def parse(s: str) -> str:
+
+def parse_highlight(s: str) -> str:
     idx = s.index("(")
     if idx == -1:
         return ""
@@ -78,12 +94,12 @@ def main():
         exit(1)
 
     with open(argv[1], "r") as f:
-        lines = f.readlines()
+        lines = f.readlines()[STARTLINE-1:]
 
     for i, line in enumerate(lines):
         cleanline = line.strip()
         if cleanline.startswith("call sonokai#highlight"):
-            pl = parse(cleanline)
+            pl = parse_highlight(cleanline)
             if pl == "":
                 print(i + 1)
                 exit(1)
@@ -95,11 +111,16 @@ def main():
                 elif line[0] == " ":
                     sl = "\t" * (idx // 2)
             lines[i] = f"{sl}{pl}\n"
-            # print(f"{i+1}:", pl)
+
+    content = "".join(lines)
+    for k, v in replacemap:
+        content = content.replace(k, v)
+
+    content = "\n".join(headlines) + content
 
     outfile = argv[2] if len(argv) > 2 else "minisonokai.vim"
     with open(outfile, "w") as f:
-        f.writelines(lines)
+        f.write(content)
 
 
 if __name__ == "__main__":
