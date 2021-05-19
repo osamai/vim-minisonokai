@@ -46,6 +46,8 @@ replacemap = [
     ("highlight clear", "hi clear"),
 ]
 
+ftplugins = ("netrw")
+
 
 def indent_line(line: str, text: str, startidx: int) -> str:
     if line == "" or text == "" or startidx == -1:
@@ -142,8 +144,27 @@ def main():
     terminal_after_else = False
     terminal_done = False
 
+    ftstack = 0
+    ftcur = ""
+
     for i, line in enumerate(lines):
         cleanline = line.strip()
+
+        if cleanline.startswith("\" ft_begin:") and cleanline.endswith("{{{"):
+            if lines[i+1].startswith("\"") and "builtin:" not in lines[i+1]:
+                print(line,lines[i+1])
+                continue
+            #print(line,lines[i+1])
+
+        #if line.startswith("\""):
+        #    if "ft_begin" in line:
+        #        print(line, lines[i+1])
+        #    if line.endswith("{{{"):
+        #        ftstack += 1
+        #    elif line.endswith("}}}"):
+        #        ftstack -= 1
+        #    if len(lines) != i+1:
+        #        lines[i] = ""
 
         if cleanline.startswith("call sonokai#highlight"):
             phi = parse_highlight(cleanline)
@@ -195,7 +216,7 @@ def main():
 
     lines[terminal_startline+1:terminal_implline] = []
 
-    content = "".join(lines[:-2])
+    content = "".join(lines)
     for k, v in replacemap:
         content = content.replace(k, v)
 

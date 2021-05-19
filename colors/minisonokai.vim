@@ -56,6 +56,7 @@ hi DiffAdd ctermfg=NONE ctermbg=22 guifg=NONE guibg=#394634 cterm=NONE gui=NONE 
 hi DiffChange ctermfg=NONE ctermbg=17 guifg=NONE guibg=#354157 cterm=NONE gui=NONE guisp=NONE
 hi DiffDelete ctermfg=NONE ctermbg=52 guifg=NONE guibg=#55393d cterm=NONE gui=NONE guisp=NONE
 hi DiffText ctermfg=235 ctermbg=250 guifg=#273136 guibg=#e1e2e3 cterm=NONE gui=NONE guisp=NONE
+
 hi Directory ctermfg=107 ctermbg=NONE guifg=#9cd57b guibg=NONE cterm=NONE gui=NONE guisp=NONE
 hi ErrorMsg ctermfg=203 ctermbg=NONE guifg=#f76c7c guibg=NONE cterm=bold,underline gui=bold,underline guisp=NONE
 hi WarningMsg ctermfg=179 ctermbg=NONE guifg=#e3d367 guibg=NONE cterm=bold gui=bold guisp=NONE
@@ -65,7 +66,9 @@ hi MatchParen ctermfg=NONE ctermbg=237 guifg=NONE guibg=#414b53 cterm=NONE gui=N
 hi NonText ctermfg=237 ctermbg=NONE guifg=#414b53 guibg=NONE cterm=NONE gui=NONE guisp=NONE
 hi Whitespace ctermfg=237 ctermbg=NONE guifg=#414b53 guibg=NONE cterm=NONE gui=NONE guisp=NONE
 hi SpecialKey ctermfg=237 ctermbg=NONE guifg=#414b53 guibg=NONE cterm=NONE gui=NONE guisp=NONE
-hi Pmenu ctermfg=250 ctermbg=236 guifg=#e1e2e3 guibg=#353f46 cterm=NONE gui=NONE guisp=NONE
+
+"hi Pmenu ctermfg=250 ctermbg=236 guifg=#e1e2e3 guibg=#353f46 cterm=NONE gui=NONE guisp=NONE
+hi Pmenu ctermfg=250 ctermbg=236 guifg=#e1e2e3 guibg=#262626 cterm=NONE gui=NONE guisp=NONE
 hi PmenuSbar ctermfg=NONE ctermbg=236 guifg=NONE guibg=#353f46 cterm=NONE gui=NONE guisp=NONE
 hi PmenuSel ctermfg=235 ctermbg=110 guifg=#273136 guibg=#7cd5f1 cterm=NONE gui=NONE guisp=NONE
 hi link WildMenu PmenuSel
@@ -294,6 +297,18 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
   endif
 endif
 
+" diff: {{{
+hi link diffAdded Green
+hi link diffRemoved Red
+hi link diffChanged Blue
+hi link diffOldFile Yellow
+hi link diffNewFile Orange
+hi link diffFile Purple
+hi link diffLine Grey
+hi link diffIndexLine Purple
+" }}}
+
+" ft_begin: netrw {{{
 hi link netrwDir Green
 hi link netrwClassify Green
 hi link netrwLink Grey
@@ -304,17 +319,19 @@ hi link netrwList Yellow
 hi link netrwHelpCmd Blue
 hi link netrwCmdSep Grey
 hi link netrwVersion Purple
+" ft_end }}}
 
-hi markdownH1 ctermfg=203 ctermbg=NONE guifg=#f76c7c guibg=NONE cterm=bold gui=bold guisp=NONE
-hi markdownH2 ctermfg=215 ctermbg=NONE guifg=#f3a96a guibg=NONE cterm=bold gui=bold guisp=NONE
-hi markdownH3 ctermfg=179 ctermbg=NONE guifg=#e3d367 guibg=NONE cterm=bold gui=bold guisp=NONE
-hi markdownH4 ctermfg=107 ctermbg=NONE guifg=#9cd57b guibg=NONE cterm=bold gui=bold guisp=NONE
-hi markdownH5 ctermfg=110 ctermbg=NONE guifg=#78cee9 guibg=NONE cterm=bold gui=bold guisp=NONE
-hi markdownH6 ctermfg=176 ctermbg=NONE guifg=#baa0f8 guibg=NONE cterm=bold gui=bold guisp=NONE
-hi markdownUrl ctermfg=110 ctermbg=NONE guifg=#78cee9 guibg=NONE cterm=underline gui=underline guisp=NONE
+" ft_begin: markdown {{{
+hi markdownH1 ctermfg=203 ctermbg=NONE guifg=#fc5d7c guibg=NONE cterm=bold gui=bold guisp=NONE
+hi markdownH2 ctermfg=215 ctermbg=NONE guifg=#f39660 guibg=NONE cterm=bold gui=bold guisp=NONE
+hi markdownH3 ctermfg=179 ctermbg=NONE guifg=#e7c664 guibg=NONE cterm=bold gui=bold guisp=NONE
+hi markdownH4 ctermfg=107 ctermbg=NONE guifg=#9ed072 guibg=NONE cterm=bold gui=bold guisp=NONE
+hi markdownH5 ctermfg=110 ctermbg=NONE guifg=#76cce0 guibg=NONE cterm=bold gui=bold guisp=NONE
+hi markdownH6 ctermfg=176 ctermbg=NONE guifg=#b39df3 guibg=NONE cterm=bold gui=bold guisp=NONE
+hi markdownUrl ctermfg=110 ctermbg=NONE guifg=#76cce0 guibg=NONE cterm=underline gui=underline guisp=NONE
 hi markdownItalic ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=italic gui=italic guisp=NONE
 hi markdownBold ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=bold gui=bold guisp=NONE
-hi markdownItalicDelimiter ctermfg=246 ctermbg=NONE guifg=#82878b guibg=NONE cterm=italic gui=italic guisp=NONE
+hi markdownItalicDelimiter ctermfg=246 ctermbg=NONE guifg=#7f8490 guibg=NONE cterm=italic gui=italic guisp=NONE
 hi link markdownCode Green
 hi link markdownCodeBlock Green
 hi link markdownCodeDelimiter Green
@@ -332,7 +349,22 @@ hi link markdownUrlTitleDelimiter Green
 hi link markdownIdDeclaration markdownLinkText
 hi link markdownBoldDelimiter Grey
 hi link markdownId Yellow
+" ft_end }}}
+" ft_begin: rst {{{
+hi rstStandaloneHyperlink ctermfg=176 ctermbg=NONE guifg=#b39df3 guibg=NONE cterm=underline gui=underline guisp=NONE
+hi rstEmphasis ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=italic gui=italic guisp=NONE
+hi rstStrongEmphasis ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=bold gui=bold guisp=NONE
+hi rstStandaloneHyperlink ctermfg=110 ctermbg=NONE guifg=#76cce0 guibg=NONE cterm=underline gui=underline guisp=NONE
+hi rstHyperlinkTarget ctermfg=110 ctermbg=NONE guifg=#76cce0 guibg=NONE cterm=underline gui=underline guisp=NONE
+hi link rstSubstitutionReference Blue
+hi link rstInterpretedTextOrHyperlinkReference Green
+hi link rstTableLines Grey
+hi link rstInlineLiteral Green
+hi link rstLiteralBlock Green
+hi link rstQuotedLiteralBlock Green
+" ft_end }}}
 
+" ft_begin: tex {{{
 hi link texStatement BlueItalic
 hi link texOnlyMath Grey
 hi link texDefName Yellow
@@ -343,13 +375,15 @@ hi link texBeginEndName Green
 hi link texDocType RedItalic
 hi link texDocTypeArgs Orange
 hi link texInputFile Green
+" ft_end }}}
 
-hi htmlH1 ctermfg=203 ctermbg=NONE guifg=#f76c7c guibg=NONE cterm=bold gui=bold guisp=NONE
-hi htmlH2 ctermfg=215 ctermbg=NONE guifg=#f3a96a guibg=NONE cterm=bold gui=bold guisp=NONE
-hi htmlH3 ctermfg=179 ctermbg=NONE guifg=#e3d367 guibg=NONE cterm=bold gui=bold guisp=NONE
-hi htmlH4 ctermfg=107 ctermbg=NONE guifg=#9cd57b guibg=NONE cterm=bold gui=bold guisp=NONE
-hi htmlH5 ctermfg=110 ctermbg=NONE guifg=#78cee9 guibg=NONE cterm=bold gui=bold guisp=NONE
-hi htmlH6 ctermfg=176 ctermbg=NONE guifg=#baa0f8 guibg=NONE cterm=bold gui=bold guisp=NONE
+" ft_begin: html/markdown/javascriptreact/typescriptreact {{{
+hi htmlH1 ctermfg=203 ctermbg=NONE guifg=#fc5d7c guibg=NONE cterm=bold gui=bold guisp=NONE
+hi htmlH2 ctermfg=215 ctermbg=NONE guifg=#f39660 guibg=NONE cterm=bold gui=bold guisp=NONE
+hi htmlH3 ctermfg=179 ctermbg=NONE guifg=#e7c664 guibg=NONE cterm=bold gui=bold guisp=NONE
+hi htmlH4 ctermfg=107 ctermbg=NONE guifg=#9ed072 guibg=NONE cterm=bold gui=bold guisp=NONE
+hi htmlH5 ctermfg=110 ctermbg=NONE guifg=#76cce0 guibg=NONE cterm=bold gui=bold guisp=NONE
+hi htmlH6 ctermfg=176 ctermbg=NONE guifg=#b39df3 guibg=NONE cterm=bold gui=bold guisp=NONE
 hi htmlLink ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=underline gui=underline guisp=NONE
 hi htmlBold ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=bold gui=bold guisp=NONE
 hi htmlBoldUnderline ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE cterm=bold,underline gui=bold,underline guisp=NONE
@@ -366,7 +400,13 @@ hi link htmlArg Blue
 hi link htmlScriptTag Purple
 hi link htmlSpecialTagName RedItalic
 hi link htmlString Green
+" ft_end }}}
 
+" ft_begin: htmldjango {{{
+hi link djangoTagBlock Yellow
+" ft_end }}}
+
+" ft_begin: xml {{{
 hi link xmlTag Green
 hi link xmlEndTag Blue
 hi link xmlTagName RedItalic
@@ -379,7 +419,9 @@ hi link xmlDocTypeKeyword RedItalic
 hi link xmlCdataStart Grey
 hi link xmlCdataCdata Purple
 hi link xmlString Green
+" ft_end }}}
 
+" ft_begin: css/scss/sass/less {{{
 hi link cssStringQ Green
 hi link cssStringQQ Green
 hi link cssAttrComma Grey
@@ -407,24 +449,9 @@ hi link cssValueTime Green
 hi link cssValueFrequency Green
 hi link cssVendor Grey
 hi link cssNoise Grey
+" ft_end }}}
 
-hi link scssMixinName Orange
-hi link scssSelectorChar Grey
-hi link scssSelectorName Red
-hi link scssInterpolationDelimiter Yellow
-hi link scssVariableValue Green
-hi link scssNull Purple
-hi link scssBoolean Purple
-hi link scssVariableAssignment Grey
-hi link scssAttribute Green
-hi link scssFunctionName Orange
-hi link scssVariable Fg
-hi link scssAmpersand Purple
-
-hi link lessMixinChar Grey
-hi link lessClass Red
-hi link lessFunction Orange
-
+" ft_begin: javascript/javascriptreact {{{
 hi link javaScriptNull OrangeItalic
 hi link javaScriptIdentifier BlueItalic
 hi link javaScriptParens Fg
@@ -433,7 +460,18 @@ hi link javaScriptNumber Purple
 hi link javaScriptLabel Red
 hi link javaScriptGlobal BlueItalic
 hi link javaScriptMessage BlueItalic
+" ft_end }}}
 
+" ft_begin: objc {{{
+highlight! link objcModuleImport Red
+highlight! link objcException Red
+highlight! link objcProtocolList Fg
+highlight! link objcDirective Red
+highlight! link objcPropertyAttribute Purple
+highlight! link objcHiddenArgument Fg
+" ft_end }}}
+
+" ft_begin: cs {{{
 hi link csUnspecifiedStatement Red
 hi link csStorage Red
 hi link csClass Red
@@ -442,16 +480,22 @@ hi link csContextualStatement Red
 hi link csInterpolationDelimiter Purple
 hi link csInterpolation Purple
 hi link csEndColon Fg
+" ft_end }}}
 
+" ft_begin: python {{{
 hi link pythonBuiltin BlueItalic
 hi link pythonExceptions Red
 hi link pythonDecoratorName OrangeItalic
+" ft_end }}}
 
+" ft_begin: lua {{{
 hi link luaFunc Green
 hi link luaFunction Red
 hi link luaTable Fg
 hi link luaIn Red
+" ft_end }}}
 
+" ft_begin: java {{{
 hi link javaClassDecl Red
 hi link javaMethodDecl Red
 hi link javaVarArg Fg
@@ -464,17 +508,22 @@ hi link javaParen2 Fg
 hi link javaParen3 Fg
 hi link javaParen4 Fg
 hi link javaParen5 Fg
+" ft_end }}}
 
+" ft_begin: scala {{{
 hi link scalaNameDefinition Fg
 hi link scalaInterpolationBoundary Purple
 hi link scalaInterpolation Purple
 hi link scalaTypeOperator Red
 hi link scalaOperator Red
 hi link scalaKeywordModifier Red
+" ft_end }}}
 
+" ft_begin: go {{{
 hi link goDirective Red
 hi link goConstants OrangeItalic
 hi link goDeclType Red
+" ft_end }}}
 
 hi link rustStructure Red
 hi link rustIdentifier OrangeItalic
@@ -564,192 +613,3 @@ hi link clojureKeyword Blue
 hi link clojureVariable Fg
 hi link clojureMeta Purple
 hi link clojureDeref Purple
-
-hi link shRange Fg
-hi link shOption Purple
-hi link shQuote Yellow
-hi link shVariable BlueItalic
-hi link shDerefSimple BlueItalic
-hi link shDerefVar BlueItalic
-hi link shDerefSpecial BlueItalic
-hi link shDerefOff BlueItalic
-hi link shVarAssign Red
-hi link shFunctionOne Green
-hi link shFunctionKey Red
-
-hi link zshOption BlueItalic
-hi link zshSubst Orange
-hi link zshFunction Green
-
-hi vimCommentTitle ctermfg=246 ctermbg=NONE guifg=#82878b guibg=NONE cterm=bold gui=bold guisp=NONE
-hi link vimLet Red
-hi link vimFunction Green
-hi link vimIsCommand Fg
-hi link vimUserFunc Green
-hi link vimFuncName Green
-hi link vimMap BlueItalic
-hi link vimNotation Purple
-hi link vimMapLhs Green
-hi link vimMapRhs Green
-hi link vimSetEqual BlueItalic
-hi link vimSetSep Fg
-hi link vimOption BlueItalic
-hi link vimUserAttrbKey BlueItalic
-hi link vimUserAttrb Green
-hi link vimAutoCmdSfxList Orange
-hi link vimSynType Orange
-hi link vimHiBang Orange
-hi link vimSet BlueItalic
-hi link vimSetSep Grey
-
-hi link makeIdent Purple
-hi link makeSpecTarget BlueItalic
-hi link makeTarget Orange
-hi link makeCommands Red
-
-hi link cmakeCommand Red
-hi link cmakeKWconfigure_package_config_file BlueItalic
-hi link cmakeKWwrite_basic_package_version_file BlueItalic
-hi link cmakeKWExternalProject Green
-hi link cmakeKWadd_compile_definitions Green
-hi link cmakeKWadd_compile_options Green
-hi link cmakeKWadd_custom_command Green
-hi link cmakeKWadd_custom_target Green
-hi link cmakeKWadd_definitions Green
-hi link cmakeKWadd_dependencies Green
-hi link cmakeKWadd_executable Green
-hi link cmakeKWadd_library Green
-hi link cmakeKWadd_link_options Green
-hi link cmakeKWadd_subdirectory Green
-hi link cmakeKWadd_test Green
-hi link cmakeKWbuild_command Green
-hi link cmakeKWcmake_host_system_information Green
-hi link cmakeKWcmake_minimum_required Green
-hi link cmakeKWcmake_parse_arguments Green
-hi link cmakeKWcmake_policy Green
-hi link cmakeKWconfigure_file Green
-hi link cmakeKWcreate_test_sourcelist Green
-hi link cmakeKWctest_build Green
-hi link cmakeKWctest_configure Green
-hi link cmakeKWctest_coverage Green
-hi link cmakeKWctest_memcheck Green
-hi link cmakeKWctest_run_script Green
-hi link cmakeKWctest_start Green
-hi link cmakeKWctest_submit Green
-hi link cmakeKWctest_test Green
-hi link cmakeKWctest_update Green
-hi link cmakeKWctest_upload Green
-hi link cmakeKWdefine_property Green
-hi link cmakeKWdoxygen_add_docs Green
-hi link cmakeKWenable_language Green
-hi link cmakeKWenable_testing Green
-hi link cmakeKWexec_program Green
-hi link cmakeKWexecute_process Green
-hi link cmakeKWexport Green
-hi link cmakeKWexport_library_dependencies Green
-hi link cmakeKWfile Green
-hi link cmakeKWfind_file Green
-hi link cmakeKWfind_library Green
-hi link cmakeKWfind_package Green
-hi link cmakeKWfind_path Green
-hi link cmakeKWfind_program Green
-hi link cmakeKWfltk_wrap_ui Green
-hi link cmakeKWforeach Green
-hi link cmakeKWfunction Green
-hi link cmakeKWget_cmake_property Green
-hi link cmakeKWget_directory_property Green
-hi link cmakeKWget_filename_component Green
-hi link cmakeKWget_property Green
-hi link cmakeKWget_source_file_property Green
-hi link cmakeKWget_target_property Green
-hi link cmakeKWget_test_property Green
-hi link cmakeKWif Green
-hi link cmakeKWinclude Green
-hi link cmakeKWinclude_directories Green
-hi link cmakeKWinclude_external_msproject Green
-hi link cmakeKWinclude_guard Green
-hi link cmakeKWinstall Green
-hi link cmakeKWinstall_files Green
-hi link cmakeKWinstall_programs Green
-hi link cmakeKWinstall_targets Green
-hi link cmakeKWlink_directories Green
-hi link cmakeKWlist Green
-hi link cmakeKWload_cache Green
-hi link cmakeKWload_command Green
-hi link cmakeKWmacro Green
-hi link cmakeKWmark_as_advanced Green
-hi link cmakeKWmath Green
-hi link cmakeKWmessage Green
-hi link cmakeKWoption Green
-hi link cmakeKWproject Green
-hi link cmakeKWqt_wrap_cpp Green
-hi link cmakeKWqt_wrap_ui Green
-hi link cmakeKWremove Green
-hi link cmakeKWseparate_arguments Green
-hi link cmakeKWset Green
-hi link cmakeKWset_directory_properties Green
-hi link cmakeKWset_property Green
-hi link cmakeKWset_source_files_properties Green
-hi link cmakeKWset_target_properties Green
-hi link cmakeKWset_tests_properties Green
-hi link cmakeKWsource_group Green
-hi link cmakeKWstring Green
-hi link cmakeKWsubdirs Green
-hi link cmakeKWtarget_compile_definitions Green
-hi link cmakeKWtarget_compile_features Green
-hi link cmakeKWtarget_compile_options Green
-hi link cmakeKWtarget_include_directories Green
-hi link cmakeKWtarget_link_directories Green
-hi link cmakeKWtarget_link_libraries Green
-hi link cmakeKWtarget_link_options Green
-hi link cmakeKWtarget_precompile_headers Green
-hi link cmakeKWtarget_sources Green
-hi link cmakeKWtry_compile Green
-hi link cmakeKWtry_run Green
-hi link cmakeKWunset Green
-hi link cmakeKWuse_mangled_mesa Green
-hi link cmakeKWvariable_requires Green
-hi link cmakeKWvariable_watch Green
-hi link cmakeKWwrite_file Green
-
-hi link jsonKeyword Red
-hi link jsonString Green
-hi link jsonBoolean Blue
-hi link jsonNoise Grey
-hi link jsonQuote Grey
-hi link jsonBraces Fg
-
-hi link yamlKey Red
-hi link yamlConstant BlueItalic
-hi link yamlString Green
-
-hi tomlTable ctermfg=176 ctermbg=NONE guifg=#baa0f8 guibg=NONE cterm=bold gui=bold guisp=NONE
-hi link tomlKey Red
-hi link tomlBoolean Blue
-hi link tomlString Green
-hi link tomlTableArray tomlTable
-
-hi link gitcommitSummary Red
-hi link gitcommitUntracked Grey
-hi link gitcommitDiscarded Grey
-hi link gitcommitSelected Grey
-hi link gitcommitUnmerged Grey
-hi link gitcommitOnBranch Grey
-hi link gitcommitArrow Grey
-hi link gitcommitFile Green
-
-hi dosiniHeader ctermfg=203 ctermbg=NONE guifg=#f76c7c guibg=NONE cterm=bold gui=bold guisp=NONE
-hi link dosiniLabel Blue
-hi link dosiniValue Green
-hi link dosiniNumber Green
-
-hi helpNote ctermfg=176 ctermbg=NONE guifg=#baa0f8 guibg=NONE cterm=bold gui=bold guisp=NONE
-hi helpHeadline ctermfg=203 ctermbg=NONE guifg=#f76c7c guibg=NONE cterm=bold gui=bold guisp=NONE
-hi helpHeader ctermfg=215 ctermbg=NONE guifg=#f3a96a guibg=NONE cterm=bold gui=bold guisp=NONE
-hi helpURL ctermfg=107 ctermbg=NONE guifg=#9cd57b guibg=NONE cterm=underline gui=underline guisp=NONE
-hi helpHyperTextEntry ctermfg=110 ctermbg=NONE guifg=#78cee9 guibg=NONE cterm=bold gui=bold guisp=NONE
-hi link helpHyperTextJump Blue
-hi link helpCommand Yellow
-hi link helpExample Green
-hi link helpSpecial Purple
-hi link helpSectionDelim Grey
