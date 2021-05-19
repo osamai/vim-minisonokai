@@ -11,7 +11,7 @@ headlines = [
     "let g:colors_name = 'minisonokai'\n",
     "if !(has('termguicolors') && &termguicolors) && !has('gui_running') && &t_Co != 256",
     "\tfinish",
-    "endif\n\n",
+    "endif\n",
 ]
 
 colors = {
@@ -45,6 +45,21 @@ replacemap = [
     ("highlight!", "hi"),
     ("highlight clear", "hi clear"),
 ]
+
+
+def indent_line(line: str, text: str, startidx: int) -> str:
+    if line == "" or text == "" or startidx == -1:
+        return ""
+    if startidx == 0:
+        return text
+
+    ind = ""
+    if line[0] == "\t":
+        ind = "\t" * startidx
+    elif line[0] == " ":
+        ind = "\t" * (startidx//2)
+
+    return ind + text
 
 
 def parse_highlight(s: str) -> str:
@@ -88,6 +103,31 @@ def parse_highlight(s: str) -> str:
     return f"hi {name} ctermfg={colors[fg][1]} ctermbg={colors[bg][1]} guifg={colors[fg][0]} guibg={colors[bg][0]} cterm={a1} gui={a1} guisp={colors[a2][0]}"
 
 
+def parse_terminal_color(s: str) -> str:
+    s = s.strip()
+    if not s.startswith("s:terminal."):
+        return ""
+
+    idx = s.index("[")
+    if idx == -1 or len(s) != idx+3:
+        return ""
+
+    cn = s[11:idx]
+    if cn == "cyan":
+        cn = "orange"
+    elif cn == "white":
+        cn = "fg"
+
+    try:
+        cx = int(s[idx+1])
+        if cx >= len(colors[cn]):
+            cx = 0
+    except (ValueError, IndexError):
+        pass
+
+    return colors[cn][cx]
+
+
 def main():
     if len(argv) == 1:
         print("input file is required", file=stderr)
@@ -96,27 +136,70 @@ def main():
     with open(argv[1], "r") as f:
         lines = f.readlines()[STARTLINE-1:]
 
+    terminal_startline = 0
+    terminal_implline = 0
+    terminal_endline = 0
+    terminal_after_else = False
+    terminal_done = False
+
     for i, line in enumerate(lines):
         cleanline = line.strip()
+
         if cleanline.startswith("call sonokai#highlight"):
-            pl = parse_highlight(cleanline)
-            if pl == "":
+            phi = parse_highlight(cleanline)
+            if phi == "":
                 print(i + 1)
                 exit(1)
-            sl = ""
-            idx = line.index("call")
-            if idx != 0:
-                if line[0] == "\t":
-                    sl = "\t" * idx
-                elif line[0] == " ":
-                    sl = "\t" * (idx // 2)
-            lines[i] = f"{sl}{pl}\n"
+            lines[i] = indent_line(line, phi, line.index("call")) + "\n"
 
-    content = "".join(lines)
+        if not terminal_done:
+            if terminal_startline == 0 and cleanline == "\" Terminal: {{{":
+                terminal_startline = i + 1
+            elif terminal_implline == 0 and terminal_startline != 0 and cleanline == "\" Implementation: {{{":
+                terminal_implline = i + 1
+            elif terminal_endline == 0 and terminal_startline != 0 and terminal_implline != 0 and line == "\" }}}\n":
+                terminal_endline = i + 1
+
+            if terminal_startline != 0 and terminal_implline != 0 and terminal_endline == 0:
+                if cleanline == "\" }}}":
+                    lines[i] = ""
+                elif cleanline == "else":
+                    terminal_after_else = True
+                    continue
+                elif line == "endif" and terminal_after_else:
+                    terminal_done = True
+                    continue
+
+                if terminal_after_else:
+                    try:
+                        eqidx = line.index("=")
+                    except ValueError:
+                        continue
+                    termvar = line[eqidx+2:-1]
+                    termcolor = parse_terminal_color(termvar)
+                    lines[i] = indent_line(line, cleanline.replace(termvar, f"'{termcolor}'"), line.index("let")) + "\n"
+                    #print(lines[i][:-1])
+                elif cleanline.startswith("let g:terminal_ansi_colors"):
+                    lc = 1
+                    arrline = cleanline[30:]
+                    while not arrline.endswith("]]"):
+                        arrline += lines[i+lc].strip("\\ \t\n")
+                        lc += 1
+
+                    arrsp = arrline[:-1].split(",")
+                    for j, v in enumerate(arrsp):
+                        arrsp[j] = "'" + parse_terminal_color(v) + "'"
+
+                    full_line = cleanline[:cleanline.index("[")+1] +  ", ".join(arrsp) + "]"
+                    lines[i:i+lc] = [indent_line(line, full_line, line.index("let")) + "\n"]
+
+    lines[terminal_startline+1:terminal_implline] = []
+
+    content = "".join(lines[:-2])
     for k, v in replacemap:
         content = content.replace(k, v)
 
-    content = "\n".join(headlines) + content
+    content = "\n".join(headlines) + "\n" + content
 
     outfile = argv[2] if len(argv) > 2 else "minisonokai.vim"
     with open(outfile, "w") as f:
